@@ -1,6 +1,6 @@
-
-
 <h1>Detailed page</h1>
 
-<%= item.url %>
-<%= item.hash %>
+<h2>Full URL: <%= item.url %></h2>
+<h2>Shortened URL: <a href="/<%=item.hash %>"><%= item.hash %></a></h2>
+
+<h3>Times Visited: <%= item.count%></h3>

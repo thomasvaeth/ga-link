@@ -10,3 +10,4 @@ var db = require('./models');
 db.link.find({where: {id: 1}}).then(function(link) {
 	console.log(link.url);
 });
+

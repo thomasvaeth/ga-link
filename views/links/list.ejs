@@ -1,1 +1,13 @@
 <h1>What is happening?</h1>
+
+<div class="container">
+	<% for (var i = 0; i < results.length; i++) { %>
+		<a href="/links/<%= results[i].id %>">
+			<div class="well">
+				<h2><%= results[i].url %></h2>
+				<h3><%= results[i].hash %></h3>
+				<h4><%= results[i].count %></h4>
+			</div>
+		</a>
+	<% } %>
+</div>

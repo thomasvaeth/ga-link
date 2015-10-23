@@ -28,6 +28,13 @@ app.post('/links/', function(req, res) {
 	});
 });
 
+app.get('/links/', function(req, res) {
+	db.link.findAll({order: 'count DESC'}).then(function(results) {
+		// res.send(results);
+		res.render('links/list', {results: results});
+	});
+});
+
 app.get('/links/:item', function(req, res) {
 	var item = parseInt(req.params.item);
 	db.link.findById(item).then(function(item) {
@@ -38,8 +45,11 @@ app.get('/links/:item', function(req, res) {
 app.get('/:hash', function(req, res) {
 	var website = req.params.hash;
 	db.link.find({where: {hash: website}}).then(function(foundWebsite) {
-		res.redirect('http://' + foundWebsite.url);
-	})
+		foundWebsite.count++;
+		foundWebsite.save().then(function() {
+			res.redirect('http://' + foundWebsite.url);
+		});
+	});
 });
 
 app.listen(3000);
