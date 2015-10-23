@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var db = require('./models');
 
+var Hashids = require('hashids');
+var hashids = new Hashids('jurgen klopp over brendan rodgers');
+
 var ejsLayouts = require('express-ejs-layouts');
 app.use(ejsLayouts);
 
@@ -16,8 +19,12 @@ app.get('/', function(req, res) {
 
 app.post('/links/', function(req, res) {
 	var data = req.body.q;
-	db.link.create({url: data, hash: ''}).then(function(link) {
-		res.redirect('/links/' + link.id);
+	db.link.create({url: data}).then(function(link) {
+		var hashKey = hashids.encode(link.id);
+		link.hash = hashKey;
+		link.save().then(function() {
+			res.redirect('/links/' + link.id);
+		});
 	});
 });
 
@@ -26,6 +33,13 @@ app.get('/links/:item', function(req, res) {
 	db.link.findById(item).then(function(item) {
 		res.render('links/show', {item: item});
 	});
+});
+
+app.get('/:hash', function(req, res) {
+	var website = req.params.hash;
+	db.link.find({where: {hash: website}}).then(function(foundWebsite) {
+		res.redirect('http://' + foundWebsite.url);
+	})
 });
 
 app.listen(3000);
