@@ -31,7 +31,6 @@ app.post('/links/', function(req, res) {
 
 app.get('/links/', function(req, res) {
 	db.link.findAll({order: 'count DESC'}).then(function(results) {
-		// res.send(results);
 		res.render('links/list', {results: results});
 	});
 });
