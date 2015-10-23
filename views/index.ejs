@@ -1,12 +1,22 @@
-<h1>Homepage!</h1>
+<div class="header">
+	<div class="container">
 
-<form action="/links/" method="POST" role="form">
-	<legend>Enter a URL to shorten:</legend>
+		<div class="row">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<h1 id="header-logo"><span>tmysplc</span></h1>
+			</div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<form method="POST" action="/links/">
+					<div>
+						<input class="form-control" type="text" name="url" placeholder="Paste a link to shorten it" autocomplete="off" autocorrect="off" autocapitalize="off">
+						<div>
+							<button class="btn btn-primary" type="submit">Shorten</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
-	<div class="form-group">
-		<label for="">URL</label>
-		<input type="text" class="form-control" id="" placeholder="Input field" name="q">
 	</div>
+</div>
 
-	<button type="submit" class="btn btn-primary">Submit</button>
-</form>

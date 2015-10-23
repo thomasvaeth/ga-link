@@ -1,6 +1,20 @@
 <h1>Detailed page</h1>
 
-<h2>Full URL: <%= item.url %></h2>
+<h2>Full URL: <% if (item.url.substring(0, 7) === 'http://') { %>
+	<%= item.url.slice(7) %></h2>
+<% } else if (item.url.substring(0, 8) === 'https://') { %>
+	<%= item.url.slice(8) %></h2>
+<% } else { %>
+	<%= item.url %></h2>
+<% } %>
 <h2>Shortened URL: <a href="/<%=item.hash %>"><%= item.hash %></a></h2>
 
 <h3>Times Visited: <%= item.count || 0%></h3>
+
+<% if (item.url.substring(0, 7) === 'http://') { %>
+	<%= item.url.slice(7) %></h2>
+<% } else if (item.url.substring(0, 8) === 'https://') { %>
+	<%= item.url.slice(8) %></h2>
+<% } else { %>
+	<%= item.url %></h2>
+<% } %>

@@ -12,13 +12,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/static'));
 
 app.get('/', function(req, res) {
 	res.render('index');
 });
 
 app.post('/links/', function(req, res) {
-	var data = req.body.q;
+	var data = req.body.url;
 	db.link.create({url: data}).then(function(link) {
 		var hashKey = hashids.encode(link.id);
 		link.hash = hashKey;
@@ -47,7 +48,11 @@ app.get('/:hash', function(req, res) {
 	db.link.find({where: {hash: website}}).then(function(foundWebsite) {
 		foundWebsite.count++;
 		foundWebsite.save().then(function() {
-			res.redirect('http://' + foundWebsite.url);
+			if (foundWebsite.url.substring(0, 4) === 'http') {
+				res.redirect(foundWebsite.url)
+			} else {
+				res.redirect('http://' + foundWebsite.url);
+			}
 		});
 	});
 });

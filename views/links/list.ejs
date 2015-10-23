@@ -4,9 +4,15 @@
 	<% for (var i = 0; i < results.length; i++) { %>
 		<a href="/links/<%= results[i].id %>">
 			<div class="well">
-				<h2><%= results[i].url %></h2>
+				<% if (results[i].url.substring(0, 7) === 'http://') { %>
+					<h2><%= results[i].url.slice(7) %></h2>
+				<% } else if (results[i].url.substring(0, 8) === 'https://') { %>
+					<h2><%= results[i].url.slice(8) %></h2>
+				<% } else { %>
+					<h2><%= results[i].url %></h2>
+				<% } %>
 				<h3><%= results[i].hash %></h3>
-				<h4><%= results[i].count %></h4>
+				<h4><%= results[i].count || 0%></h4>
 			</div>
 		</a>
 	<% } %>
