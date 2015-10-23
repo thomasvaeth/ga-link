@@ -3,4 +3,4 @@
 <h2>Full URL: <%= item.url %></h2>
 <h2>Shortened URL: <a href="/<%=item.hash %>"><%= item.hash %></a></h2>
 
-<h3>Times Visited: <%= item.count%></h3>
+<h3>Times Visited: <%= item.count || 0%></h3>
