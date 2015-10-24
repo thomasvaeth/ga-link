@@ -7,7 +7,7 @@ var db = require('./models');
 // 	console.log(link);
 // });
 
-db.link.find({where: {id: 1}}).then(function(link) {
-	console.log(link.url);
-});
+// db.link.find({where: {id: 1}}).then(function(link) {
+// 	console.log(link.url);
+// });
 

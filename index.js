@@ -18,18 +18,18 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
-app.post('/links/', function(req, res) {
+app.post('/links', function(req, res) {
 	var data = req.body.url;
 	db.link.create({url: data}).then(function(link) {
-		var hashKey = hashids.encode(link.id);
-		link.hash = hashKey;
+		var hash = hashids.encode(link.id);
+		link.hash = hash;
 		link.save().then(function() {
 			res.redirect('/links/' + link.id);
 		});
 	});
 });
 
-app.get('/links/', function(req, res) {
+app.get('/links', function(req, res) {
 	db.link.findAll({order: 'count DESC'}).then(function(results) {
 		res.render('links/list', {results: results});
 	});

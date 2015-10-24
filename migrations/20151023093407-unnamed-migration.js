@@ -9,7 +9,7 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    queryInterface.changeColumn('links', 'count',
+    return queryInterface.changeColumn('links', 'count',
       {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -28,5 +28,10 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
+    return queryInterface.changeColumn('links', 'count',
+      {
+        type: Sequelize.INTEGER,
+      }
+    );
   }
 };
