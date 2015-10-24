@@ -1,7 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var link = sequelize.define('link', {
-    // Alter type to TEXT
     url: DataTypes.TEXT,
     hash: DataTypes.STRING,
     count: DataTypes.INTEGER

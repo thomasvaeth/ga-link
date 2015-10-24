@@ -9,7 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       url: {
-        // Alter type to TEXT
         type: Sequelize.STRING
       },
       hash: {
